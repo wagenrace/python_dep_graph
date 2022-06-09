@@ -5,9 +5,9 @@ from py2neo import Graph
 
 app = FastAPI()
 
-url = os.environ["NEO4J_url"]
-user = os.environ["NEO4J_user"]
-pswd = os.environ["NEO4J_pswd"]
+url = os.environ["NEO4J_URL"]
+user = os.environ["NEO4J_USER"]
+pswd = os.environ["NEO4J_PSWD"]
 
 graph = Graph(url, auth=(user, pswd))
 
