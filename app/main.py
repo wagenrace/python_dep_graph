@@ -3,7 +3,19 @@ import os
 from fastapi import FastAPI
 from py2neo import Graph
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 url = os.environ["NEO4J_URL"]
 user = os.environ["NEO4J_USER"]
