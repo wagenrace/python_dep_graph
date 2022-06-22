@@ -40,3 +40,16 @@ async def read_item(package_names: list):
     ).data()[0]
 
     return response
+
+@app.post("/getPackagesInfoV2/")
+async def read_item(package_names: list):
+    response = graph.run(
+        f"""
+            MATCH (n:Package)-[:DEPENDS_ON*0..]->(m:Package)
+            WHERE n.name in {package_names}
+            WITH DISTINCT m as p
+            RETURN DISTINCT p.license as licenses, collect(p.name) as packageNames, sum(p.size) as totalSizeBytes
+        """
+    ).data()
+
+    return response

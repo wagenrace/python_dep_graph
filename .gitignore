@@ -4,3 +4,4 @@
 /env.list
 /find_all_dep.cypher
 /__pycache__
+*.pyc
