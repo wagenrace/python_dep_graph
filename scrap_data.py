@@ -5,6 +5,7 @@ import pandas as pd
 import requests
 from tqdm import tqdm
 
+from app.scrap_helpers import get_license
 
 all_packages = {}
 all_start_packages = ["tomni", "neo4j"]
@@ -34,9 +35,12 @@ def add_package(package_name: str):
         raw_deps = raw_deps if raw_deps else []
         package_size = max([i["size"] for i in data["urls"]])
 
-        license = data["info"].get("license")
-        license = license if license else f"{package_name} has no known license"
-        all_packages[package_name] = {"license": license, "package_size": package_size}
+        # Get license
+        license = get_license(data)
+        all_packages[package_name] = {
+            "license": license,
+            "package_size": package_size,
+        }
 
         deps = []
         for raw_dep in raw_deps:
@@ -54,15 +58,6 @@ def add_package(package_name: str):
 
 for start_package in tqdm(all_start_packages):
     add_package(start_package)
-
-    # if (l := len(all_packages)) % 100 == 0:
-    #     all_packages_pd = pd.DataFrame(all_packages).transpose()
-    #     all_packages_pd.index.name = "name"
-    #     deps_on_pd = pd.DataFrame(deps_on, index=None)
-
-    #     all_packages_pd.to_csv(f"all_packages_{l}.csv")
-    #     deps_on_pd.to_csv(f"all_dependencies_{l}.csv", index=False)
-
 
 all_packages_pd = pd.DataFrame(all_packages).transpose()
 all_packages_pd.index.name = "name"
