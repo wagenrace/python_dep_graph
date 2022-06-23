@@ -36,7 +36,7 @@ async def read_item(package_names: list):
             MATCH (n:Package)-[:DEPENDS_ON*0..]->(m:Package)
             WHERE n.name in {package_names}
             WITH DISTINCT m as p
-            RETURN collect(p.name) as packageNames, collect(DISTINCT p.license) as licenses, sum(p.size) as totalSizeBytes"""
+            RETURN collect(p.name) as packageNames, collect(DISTINCT p.license) as licenses, sum(p.package_size) as totalSizeBytes"""
     ).data()[0]
 
     return response
@@ -48,7 +48,7 @@ async def read_item(package_names: list):
             MATCH (n:Package)-[:DEPENDS_ON*0..]->(m:Package)
             WHERE n.name in {package_names}
             WITH DISTINCT m as p
-            RETURN DISTINCT p.license as licenses, collect(p.name) as packageNames, sum(p.size) as totalSizeBytes
+            RETURN DISTINCT p.license as licenses, collect(p.name) as packageNames, sum(p.package_size) as totalSizeBytes
         """
     ).data()
 
