@@ -1,5 +1,6 @@
 /.pytest_cache
 *.csv
+!analysis/*.csv
 /env.list
 /find_all_dep.cypher
 /__pycache__
