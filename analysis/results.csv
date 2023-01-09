@@ -1,4 +1,4 @@
-"name", "license","GPL_dependecies","issue"
+"name", "license","GPL_dependencies","issue"
 "apache-airflow-providers-mysql","Apache license" ,["mysql-connector-python","mysqlclient"] , "https://github.com/apache/airflow/issues/9898"
 "jiwer" ,"Apache license" ,["levenshtein"], "https://github.com/jitsi/jiwer/issues/69"
 "optbinning","Apache license" ,["ecos"] , ""
