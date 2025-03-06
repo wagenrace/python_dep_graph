@@ -12,7 +12,7 @@ all_start_packages = ["tomni", "neo4j"]
 deps_on = []
 
 response = requests.get(
-    r"https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.min.json"
+    r"https://hugovk.github.io/top-pypi-packages/top-pypi-packages.min.json"
 )
 top5000 = response.json()["rows"]
 
